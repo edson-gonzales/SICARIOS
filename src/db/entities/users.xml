@@ -1,4 +1,4 @@
 <Users>
 	<User account="AdminUser" password="test123" role="Administrator"></User>
-	<User account="pepe" password="pepe123" role="Customer"></User>
+	<User account="EmployeeUser" password="test123" role="Employee"></User>
 </Users>

@@ -1,7 +1,5 @@
 __author__ = 'aj'
 
-import sys
-sys.path.append("../")
 from utils.util import *
 
 
@@ -9,7 +7,7 @@ class Login(object):
     """
     Create an instance of Login class
     it allows to login an system user
-    attribute credentials will store the user crendentials (account name and password),
+    attribute credentials will store the user credentials (account name and password),
     _text attribute store the output labels to retrieve data from console
     """
 
@@ -27,6 +25,10 @@ class Login(object):
 
     def init_session(self):
         while True:
+            clear_console()
+            print "**** Welcome to system, please enter your credentials ****"
+            if self.credentials['account'] != None:
+                print "User account or password are wrong, please try again"
             self.get_user_credentials()
             if self.authenticate_credentials():
                 print "Welcome %s " % self.session[0][1]
@@ -42,7 +44,7 @@ class Login(object):
             entry_saved = False
             while not entry_saved:
                 """ display same label while the user entering empty string """
-                entry = raw_input(self._output_label[key])
+                entry = get_data_from_console("\t" + self._output_label[key])
                 entry_saved = self._save_entry(entry, key)
 
     def _save_entry(self, entry, key):

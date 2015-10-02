@@ -1,0 +1,29 @@
+<Movies>
+	<Movie code="J001"
+		   title="Jaws"
+		   storyline="When a gigantic great white shark begins to menace the small island community of Amity, a police chief, a marine scientist and grizzled fisherman set out to stop it."
+		   release_year="1975"
+		   stars="S01-RS, S02-RS, S03-RD"
+		   director="D01-SP"
+		   rating="0"
+		   ranking="0"
+		   genres="terror"
+		   rental_price=""
+		   sell_price=""
+		   quality_available="DVD, Blue-ray">
+	</Movie>
+	<Movie code="S001"
+		   title="Scarface"
+		   storyline="Tony Montana manages to leave Cuba during the Mariel exodus of 1980. He finds himself in a Florida refugee camp but his friend Manny has a way out for them: undertake a contract killing and arrangements will be made to get a green card. He's soon working for drug dealer Frank Lopez and shows his mettle when a deal with Columbian drug dealers goes bad. He also brings a new level of violence to Miami. Tony is protective of his younger sister but his mother knows what he does for a living and disowns him. Tony is impatient and wants it all however, including Frank's empire and his mistress Elvira Hancock. Once at the top however, Tony's outrageous actions make him a target and everything comes crumbling down."
+		   release_year="1983"
+		   stars="S01-AP, S02-MF, S03-SB"
+		   director="D01-BDP"
+		   rating="0"
+		   ranking="0"
+		   genres="Crime,Drama"
+		   rental_price=""
+		   sell_price=""
+		   quality_available="DVD, Blue-ray">
+	</Movie>
+
+</Movies>
