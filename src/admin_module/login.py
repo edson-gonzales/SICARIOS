@@ -30,7 +30,7 @@ class Login(object):
             clear_console()
             print "**** Welcome to system, please enter your credentials ****"
             if self.credentials['account'] is not None:
-                print "-> User account or password are wrong, please try again"
+                print "-> Provided credentials are wrong or your account is disabled, please try again"
             self.get_user_credentials()
             if self.authenticate_credentials():
                 print "Welcome %s " % self.get_session_user_role()
@@ -77,7 +77,7 @@ class Login(object):
         user = self.get_user_from_database(self.credentials['account'])
         """ get an user from users.xml file that match with stored credentials """
         if not validate_user_is_null(user):
-            if user[1] == self.credentials['password']:
+            if user[1] == self.credentials['password'] and user[4] == 'true':
                 self.set_session(user)
                 return True
         return False
@@ -125,13 +125,5 @@ class Login(object):
 
         result = self.conn.query(string_query)
         result = result.fetchone()
-        index = 0
-        for index in range(0, len(result)):
-            print result[index]
-
         """ get the first row from retrieved data in a tuple """
         return result
-
-# login = Login()
-# login.init_session()
-
