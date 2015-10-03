@@ -133,6 +133,6 @@ def convert_to_int_number(entry):
     try:
         entry = int(entry)
     except ValueError:
-        print entry+ " is not a number"
+        print "" #entry + " is not a number"
     return entry
 
