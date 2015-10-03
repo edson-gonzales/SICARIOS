@@ -1,7 +1,7 @@
 __author__ = 'aj'
 
 from utils.util import *
-
+from getpass import getpass
 
 class Login(object):
     """
@@ -27,8 +27,8 @@ class Login(object):
         while True:
             clear_console()
             print "**** Welcome to system, please enter your credentials ****"
-            if self.credentials['account'] != None:
-                print "User account or password are wrong, please try again"
+            if self.credentials['account'] is not None:
+                print "-> User account or password are wrong, please try again"
             self.get_user_credentials()
             if self.authenticate_credentials():
                 print "Welcome %s " % self.session[0][1]
@@ -44,8 +44,15 @@ class Login(object):
             entry_saved = False
             while not entry_saved:
                 """ display same label while the user entering empty string """
-                entry = get_data_from_console("\t" + self._output_label[key])
+                entry = self.get_user_credential(key)
                 entry_saved = self._save_entry(entry, key)
+
+    def get_user_credential(self, key):
+        if key == 'account':
+            entry = get_data_from_console("\t" + self._output_label[key])
+        else:
+            entry = getpass("\t" + self._output_label[key])
+        return entry
 
     def _save_entry(self, entry, key):
         """

@@ -121,8 +121,18 @@ def validate_user_is_null(user):
 
 
 def is_number(entry):
+    """
+    Verify if data in entry variable is an int number
+    :param entry: string that should contains a number
+    :return: True if entry is an int number, False otherwise
+    """
+    return isinstance(convert_to_int_number(entry), int)
+
+
+def convert_to_int_number(entry):
     try:
-        number = int(entry)
+        entry = int(entry)
     except ValueError:
-        return False
-    return True
+        print entry+ " is not a number"
+    return entry
+

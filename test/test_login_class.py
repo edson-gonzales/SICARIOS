@@ -40,7 +40,6 @@ class TestLogin(unittest.TestCase):
         role = user[2][1]
         self.assertEqual(role, login.get_session_user_role())
 
-
 if __name__ == "__main__":
     unittest.main()
 
