@@ -2,6 +2,7 @@ __author__ = 'aj'
 
 from utils.util import *
 from getpass import getpass
+from db.transactions.DBManager import *
 
 class Login(object):
     """
@@ -15,13 +16,14 @@ class Login(object):
         """
         :param credentials: dictionary that will store the system user credentials: account name and password
         :param _output_label: dictionary that will store the output labels displayed in console to retrieve system user credentials
-        :param session: list of tuples that keeps data from an existing user in database that match with credentials entered from console
+        :param session: dictionary that keeps data from an existing user in database that match with credentials entered from console
         :return: none
         """
         self.credentials = {"account": None, "password": None}
         self._output_label = {'account': "Insert user account: ",
                               'password': "Insert your password: "}
-        self.session = ()
+        self.session = dict()
+        self.conn = DBManager()
 
     def init_session(self):
         while True:
@@ -31,7 +33,7 @@ class Login(object):
                 print "-> User account or password are wrong, please try again"
             self.get_user_credentials()
             if self.authenticate_credentials():
-                print "Welcome %s " % self.session[0][1]
+                print "Welcome %s " % self.get_session_user_role()
                 break
 
     def get_user_credentials(self):
@@ -72,12 +74,12 @@ class Login(object):
         Will return True if credentials matches with user data obtained from get_user_from_file method
         :return: True if user account and password obtained from users.xml file matches with entered credentials, False otherwise
         """
-        user = get_user_from_xml_file(self.credentials['account'])
+        user = self.get_user_from_database(self.credentials['account'])
         """ get an user from users.xml file that match with stored credentials """
         if not validate_user_is_null(user):
-            if user[1][1] == self.credentials['password']:
+            if user[1] == self.credentials['password']:
                 self.set_session(user)
-            return True
+                return True
         return False
 
     def set_session(self, user):
@@ -86,7 +88,8 @@ class Login(object):
         :param user: list of tuples that stores data of a user retrieved from database
         :return: None
         """
-        self.session = user
+        self.session = {'account': user[0], 'password': user[1], 'name': user[2], 'last_name': user[3],
+                        'active': user[4], 'role': user[5]}
 
     def get_session(self):
         """
@@ -100,7 +103,7 @@ class Login(object):
         return the user role stored in the session
         :return: user role
         """
-        return self.session[2][1]
+        return self.session['role']
 
     def print_credentials(self):
         """
@@ -109,3 +112,26 @@ class Login(object):
         """
         for key in self._output_label:
             print self.credentials[key]
+
+    def get_user_from_database(self, account):
+        """
+        Will retrieve a user from database that matches with account column
+        :param account: String, search criteria for database
+        :return: Tuple with user data
+        """
+        string_query = "SELECT User.user_name, User.password, User.first_name, User.last_name, User.active, Role.role_name " +\
+                       "FROM User, Role " +\
+                       "WHERE user.user_name='" + account + "' and user.role_ID=Role.role_id"
+
+        result = self.conn.query(string_query)
+        result = result.fetchone()
+        index = 0
+        for index in range(0, len(result)):
+            print result[index]
+
+        """ get the first row from retrieved data in a tuple """
+        return result
+
+# login = Login()
+# login.init_session()
+

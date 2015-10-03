@@ -51,7 +51,8 @@ class Director(Person):
         return search_movie_in_filmography(criteria, self._filmography)
 
     def save_into_database(self):
-        insert_query = "INSERT INTO Director (director_first_name, director_last_name) VALUES ('" +\
-                        self.first_name + "', '" + self.first_name + "')"
+        insert_query = "INSERT INTO Director (director_first_name, director_last_name)" +\
+                       "VALUES ('" + self.first_name + "', '" + self.first_name + "')"
         self.conn.query(insert_query)
+        self.conn.close()
 
