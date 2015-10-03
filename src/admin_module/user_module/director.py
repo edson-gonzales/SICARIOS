@@ -2,7 +2,7 @@ __author__ = 'alex alvarez'
 
 from person import Person
 from utils.util import search_movie_in_filmography
-
+from db.transactions.DBManager import DBManager
 
 class Director(Person):
     """
@@ -19,6 +19,7 @@ class Director(Person):
         Person.__init__(self, first_name, last_name)
         self._filmography = []
         """Store the movies instances in filmography list"""
+        self.conn = DBManager()
 
     def add_movie_to_filmography(self, movie):
         """
@@ -47,5 +48,10 @@ class Director(Person):
         :param criteria: dictionary type, used to search a movie in filmography list by code or title
         :return: a movie object that meets with search criteria, empty list otherwise
         """
-
         return search_movie_in_filmography(criteria, self._filmography)
+
+    def save_into_database(self):
+        insert_query = "INSERT INTO Director (director_first_name, director_last_name) VALUES ('" +\
+                        self.first_name + "', '" + self.first_name + "')"
+        self.conn.query(insert_query)
+

@@ -15,7 +15,6 @@ class CreateDirector():
         self.create_director()
         self.save_director()
 
-
     def create_director(self):
         self.director.first_name = get_data_from_console("Director name: ")
         self.director.last_name = get_data_from_console("Director last name: ")
@@ -23,7 +22,8 @@ class CreateDirector():
     def save_director(self):
         self.print_options()
         if str(self.option) == '1':
-            print "save in xml file / or DB"
+            self.director.save_into_database()
+            print "Saving in DB....\nDirector was saved in DB"
             any_key = get_data_from_console("Data was saved, please press any key to return menu...")
         elif str(self.option) == '2':
             any_key = get_data_from_console("Data will not saved, any key to return menu...")
