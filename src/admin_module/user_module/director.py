@@ -68,3 +68,9 @@ class Director(Person):
                         "WHERE director_id='" + str(director_id) + "'"
         self.conn.query(update_query)
         self.conn.close()
+
+    def delete_director_from_database(self, director_id):
+        delete_query = "DELETE FROM Director " +\
+                        "WHERE director_id='" + str(director_id) + "'"
+        self.conn.query(delete_query)
+        self.conn.close()

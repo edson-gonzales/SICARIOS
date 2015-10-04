@@ -34,6 +34,8 @@ class MenuBase(object):
             user_input = get_data_from_console("\tEnter the operation number you want to perform: ")
             if self.validate_user_input(user_input):
                 self.execute_action(user_input)
+        clear_console()
+        print("You exit from system")
 
     def validate_user_input(self, user_input):
         """
