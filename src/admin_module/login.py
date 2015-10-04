@@ -4,6 +4,7 @@ from utils.util import *
 from getpass import getpass
 from db.transactions.DBManager import *
 
+
 class Login(object):
     """
     Create an instance of Login class

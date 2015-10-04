@@ -4,7 +4,7 @@ from admin_module.user_module.director import *
 from utils.util import *
 
 
-class CreateDirector():
+class CreateDirector:
     def __init__(self):
         self.option = ''
         self.director = Director(None, None)

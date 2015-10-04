@@ -2,11 +2,24 @@ __author__ = 'aj'
 
 import sys
 import os
+from db.transactions.DBManager import *
 
 sys.path.append("../")
 
 from xml.dom import minidom
 from admin_module.movie import *
+
+
+def get_all_data_from_table(table_name):
+    """
+    Will retrieve all data from table specified in table_name variable
+    :param table_name: String that contains the table name for query
+    :return: A list of tuples, each tuple is a row from table
+    """
+    conn = DBManager()
+    string_query = "SELECT * FROM " + table_name
+    rows = conn.query(string_query)
+    return rows
 
 
 def get_data_from_console(display_text):

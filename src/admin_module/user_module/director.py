@@ -4,6 +4,7 @@ from person import Person
 from utils.util import search_movie_in_filmography
 from db.transactions.DBManager import DBManager
 
+
 class Director(Person):
     """
     Create an instance of Director class
@@ -11,6 +12,7 @@ class Director(Person):
     Director class extends from Person class, attibute 'filmography' keeps a movies list
     that were directed by this director
     """
+
     def __init__(self, first_name, last_name):
         """
         Extends from Person.__init__() to store common data of a person
@@ -18,6 +20,7 @@ class Director(Person):
         """
         Person.__init__(self, first_name, last_name)
         self._filmography = []
+        self.id = ''
         """Store the movies instances in filmography list"""
         self.conn = DBManager()
 
@@ -50,9 +53,18 @@ class Director(Person):
         """
         return search_movie_in_filmography(criteria, self._filmography)
 
+    def print_director(self):
+        print("{0} {1}".format(self.last_name, self.first_name))
+
     def save_into_database(self):
-        insert_query = "INSERT INTO Director (director_first_name, director_last_name)" +\
-                       "VALUES ('" + self.first_name + "', '" + self.first_name + "')"
+        insert_query = "INSERT INTO Director (director_first_name, director_last_name)" + \
+                       "VALUES ('" + self.first_name + "', '" + self.last_name + "')"
         self.conn.query(insert_query)
         self.conn.close()
 
+    def update_into_database(self, director_id):
+        update_query = "UPDATE Director " +\
+                       "SET director_first_name='" + self.first_name + "', director_last_name='" + self.last_name + "'" +\
+                        "WHERE director_id='" + str(director_id) + "'"
+        self.conn.query(update_query)
+        self.conn.close()

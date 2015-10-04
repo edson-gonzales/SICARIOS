@@ -13,5 +13,5 @@ class MenuManageDirector(MenuBase):
         MenuBase.__init__(self, self.manage_user_options, self.manage_user_actions, self.menu_title)
 
     def execute(self):
-        menu_manage_user = MenuManageDirector()
-        menu_manage_user.display_menu()
+        menu_manage_director = MenuManageDirector()
+        menu_manage_director.display_menu()
